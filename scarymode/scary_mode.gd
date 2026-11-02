@@ -28,7 +28,7 @@ func _on_node_added(node: Node) -> void:
 		jumpscare_index = node.get_index()
 	elif node.name == "ScaryModeContainer":
 		add_jumpscare_option.call_deferred(node)
-	elif node is trigger_tutorial and node.tutorial_type == "END_GAME":
+	elif node.get("tutorial_type") == "END_GAME":
 		node.get_node("%Area3D").body_entered.connect(_on_end_trigger_entered)
 	elif not jumpscare_on and node.get_script() and node.get_script().resource_path.ends_with("scary_mode_stinger_player.gd"):
 		node.time_left_in_scary_mode = INF
