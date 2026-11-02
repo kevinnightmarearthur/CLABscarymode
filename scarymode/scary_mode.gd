@@ -6,9 +6,10 @@ var jumpscare_copy: Control
 
 var jumpscare_index := -1
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	get_tree().node_added.connect(_on_node_added)
 
+func _ready() -> void:
 	while not is_instance_valid(Globals.MAIN_NODE):
 		await get_tree().process_frame
 	await get_tree().process_frame
@@ -33,7 +34,7 @@ func _on_node_added(node: Node) -> void:
 	elif not jumpscare_on and node.get_script() and node.get_script().resource_path.ends_with("scary_mode_stinger_player.gd"):
 		node.time_left_in_scary_mode = INF
 
-func add_jumpscare_option(scary_row: Control) -> void:
+func add_jumpscare_option(scary_row) -> void:
 	if not is_instance_valid(scary_row) or scary_row.is_queued_for_deletion():
 		return
 	var menu = scary_row.owner
